@@ -1,3 +1,7 @@
 ===== Number Extractor =====
 
-This python application is to extract all contact numbers from the given inout file.
+This python application is to extract all contact numbers from the given data.
+
+Version 1
+- direct data supply as input file
+- output as file
