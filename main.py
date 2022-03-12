@@ -39,11 +39,13 @@ print("\n\n", len(data), "contacts retrieved")
 
 if(input("Do you wish to create a CSV file [Y/N]: ").lower() == 'y'):
 	data_file = open("data.csv", "w")
-	writer = csv.writer(data_file)
+
+	data_length = len(data)
 
 	for i in range(len(data)):
-		print("saving contacts to CSV file -", int(((i + 1)/data_length) * 100), '% (' + str(i + 1) + ' out of ' + str(data) + ')',  end="\r")
-		writer.writerow(data[i])
+		print("saving contacts to CSV file -", int(((i + 1)/data_length) * 100), '% (' + str(i + 1) + ' out of ' + str(data[i]) + ')',  end="\r")
+		data_file.write(data[i])
+		data_file.write("\n")
 
 	data_file.close()
 
@@ -56,7 +58,7 @@ else:
 	data_length = len(data)
 
 	for i in range(len(data)):
-		print("saving contacts -", int(((i + 1)/data_length) * 100), '% (' + str(i + 1) + ' out of ' + str(data) + ')',  end="\r")
+		print("saving contacts -", int(((i + 1)/data_length) * 100), '% (' + str(i + 1) + ' out of ' + str(data[i]) + ')',  end="\r")
 		data_file.write(data[i])
 		data_file.write("\n")
 
