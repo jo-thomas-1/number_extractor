@@ -15,32 +15,22 @@ data_file.close()
 
 data = []
 temp = ""
-input_data_length = len(input_data)
+data_length = len(input_data)
 
-print("Data length: ", input_data_length)
+print("Data length: ", data_length)
 
 for i in range(len(input_data)):
-	print("scannig data -", int(((i + 1)/input_data_length) * 100), '%',  end="\r")
+	print("Scannig data -", int(((i + 1)/data_length) * 100), '% (' + str(i + 1) + ' out of ' + str(data_length) + ')',  end="\r")
 
 	if(input_data[i].isdigit() or input_data[i] == '+' or input_data[i] == ' '):
 		temp += input_data[i]
 	elif(temp.strip() != ""):
-		data.append(temp.strip())
+		temp = temp.strip()
+		if(len(temp) >= 10 and temp[0] == '+' and temp not in data):
+			data.append(temp)
 		temp = ""
 
-print("\n\n", len(data), "values found")
-
-# --------------------------------------------------------------------
-
-# clean data
-output_data = []
-count = 0
-
-for i in range(len(data)):
-	if(len(data[i]) >= 10 and data[i][0] == '+' and data[i] not in output_data):
-		output_data.append(data[i])
-		count += 1
-		print(count, "contacts retrieved", end="\r")
+print("\n\n", len(data), "contacts retrieved")
 
 # --------------------------------------------------------------------
 
@@ -50,9 +40,11 @@ try:
 except Exception as e:
 	data_file = open("data.out", "w")
 
-for i in range(len(output_data)):
-	print("saving contacts...", end="\r")
-	data_file.write(output_data[i])
+data_length = len(data)
+
+for i in range(len(data)):
+	print("saving contacts -", int(((i + 1)/data_length) * 100), '% (' + str(i + 1) + ' out of ' + str(data) + ')',  end="\r")
+	data_file.write(data[i])
 	data_file.write("\n")
 
 data_file.close()
