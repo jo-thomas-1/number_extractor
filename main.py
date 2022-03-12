@@ -20,7 +20,7 @@ input_data_length = len(input_data)
 print("Data length: ", input_data_length)
 
 for i in range(len(input_data)):
-	print(i + 1, "characters scanned - ", ((i + 1)/input_data_length) * 100, '%',  end="\r")
+	print("scannig data -", int(((i + 1)/input_data_length) * 100), '%',  end="\r")
 
 	if(input_data[i].isdigit() or input_data[i] == '+' or input_data[i] == ' '):
 		temp += input_data[i]
@@ -28,7 +28,7 @@ for i in range(len(input_data)):
 		data.append(temp.strip())
 		temp = ""
 
-print("\n\n\n", len(data), "values found")
+print("\n\n", len(data), "values found")
 
 # --------------------------------------------------------------------
 
@@ -51,7 +51,7 @@ except Exception as e:
 	data_file = open("data.out", "w")
 
 for i in range(len(output_data)):
-	print(i + 1, "contacts saved", end="\r")
+	print("saving contacts...", end="\r")
 	data_file.write(output_data[i])
 	data_file.write("\n")
 
