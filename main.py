@@ -1,4 +1,5 @@
 import sys
+import csv
 
 # get input data file
 try:
@@ -35,16 +36,28 @@ print("\n\n", len(data), "contacts retrieved")
 # --------------------------------------------------------------------
 
 # set output data file
-try:
-	data_file = open(sys.argv[2], "w")
-except Exception as e:
-	data_file = open("data.out", "w")
 
-data_length = len(data)
+if(input("Do you wish to create a CSV file [Y/N]: ").lower() == 'y'):
+	data_file = open("data.csv", "w")
+	writer = csv.writer(data_file)
 
-for i in range(len(data)):
-	print("saving contacts -", int(((i + 1)/data_length) * 100), '% (' + str(i + 1) + ' out of ' + str(data) + ')',  end="\r")
-	data_file.write(data[i])
-	data_file.write("\n")
+	for i in range(len(data)):
+		print("saving contacts to CSV file -", int(((i + 1)/data_length) * 100), '% (' + str(i + 1) + ' out of ' + str(data) + ')',  end="\r")
+		writer.writerow(data[i])
 
-data_file.close()
+	data_file.close()
+
+else:
+	try:
+		data_file = open(sys.argv[2], "w")
+	except Exception as e:
+		data_file = open("data.out", "w")
+
+	data_length = len(data)
+
+	for i in range(len(data)):
+		print("saving contacts -", int(((i + 1)/data_length) * 100), '% (' + str(i + 1) + ' out of ' + str(data) + ')',  end="\r")
+		data_file.write(data[i])
+		data_file.write("\n")
+
+	data_file.close()
